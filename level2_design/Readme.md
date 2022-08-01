@@ -66,7 +66,7 @@ assign field1__h109 =
 	       x__h39889_2 :
 	       IF_mav_putvalue_instr_BITS_31_TO_25_EQ_0b10000_ETC___d2273 ; //x__h39889_2 is used on line 3911 to compute ANDN  
          
- assign x__h39889 = mav_putvalue_src1 & (~mav_putvalue_src2) ; 
+ assign x__h39889 = mav_putvalue_src1 & mav_putvalue_src2 ; 
  assign x__h39889_2 = mav_putvalue_src1 & (~mav_putvalue_src2) ;//adding not of src2 in x__h39889_2:line 2661 uses this for returning ANDN output
          
   ```
