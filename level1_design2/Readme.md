@@ -4,21 +4,22 @@ The verification environment is setup using [Vyoma's UpTickPro](https://vyomasys
 
 *Gitpod screenshot*
 
-![image](https://user-images.githubusercontent.com/40855496/182069731-8ecb2392-f7be-42d7-b80c-505c452451cc.png)
+![image](https://user-images.githubusercontent.com/40855496/182182794-d86765d4-db87-40c5-8768-9050da92d365.png)
+
 
 # Verification Environment
 
-The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test (mux module here) which takes in 2-bit inputs “inp0” to “inp30” and gives 2-bit output “out” based on 4-bit select lines “sel”
+The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test (mux module here) which takes in 1-bit input “inp_bit” to fetch a input bit-stream and gives a 1-bit output “seq_seen” if an overlapping sequence 1011 is seen in input bit stream.
 
-The values are assigned to the input port using loop for 100 times to generate a long sequence
+The values are assigned to the input port using loop for 100 times to generate a long stream
 ```
 Inp=random.randint(0,1)
 dut.inp_bit.value=Inp
 
 ```
 
-The output if the sequence is seen so, a count variable is incremented for counting the number of times when sequence is sent but not seen.
-The assert statement to catch error is implemented using the count variable's content.
+If the sequence 1011 is sent, the output dut.seq_seen.value goes high. A count variable is incremented for counting the number of times when sequence is sent but not seen.
+The assert statement to catch error is implemented using the count variable's value.
 
 It is implemented as follows:
 ```
@@ -87,8 +88,17 @@ Detecting Overlapping sequences now:
 The updated design is checked in as seq_detect_1011_fix.v
 
 ## Verification Strategy
-The CoCoTb based Python test is developed using Vyoma's UpTickPro verification framework. 
-Randomised input testing has been used to cover width and depth for verification of the design.
+
+Verification Strategy for Swequence detection is as follows:
+
+-inp_bit has been loaded with a random input stream, which is long enough to repeat non-overlapping/overlapping sequences for 1011.
+
+-this incoming stream's last four bits are captured and at this point dut.seq_seen.value is checked
+
+-the value of seq_seen gives the output for is the sequence is correctly detected or not.
+
+-to exercise all of the input pattern(1011) direct assert is not used, instead a count variable is incremented whenever sequence pattern is sent but not detected by dut.
+-assert failure is raised for count > 0
 
 ## Is the verification complete ?
-
+Randomised input testing has been used to cover width and depth for verification of the design. The testbench geneartes a random sequence stream and checks for 1011 in that and raises error whenever not detected. The tb thouroughly exercises all possible scenarios, it can be said the design verification is complete.
