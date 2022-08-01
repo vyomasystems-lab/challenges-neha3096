@@ -3,7 +3,7 @@
 The verification environment is setup using [Vyoma's UpTickPro](https://vyomasystems.com) provided for the hackathon.
 
 *Gitpod screenshot*
-
+ ![image](https://user-images.githubusercontent.com/40855496/182069054-7d984567-91ed-48c2-a0a3-050540d6921b.png)
 
 # Verification Environment
 
@@ -50,6 +50,7 @@ For the mux design, the select line 12 is missing and consecutively we have two 
 
 ## Design Fix
 Updating the design and re-running the test makes the test pass.
+![image](https://user-images.githubusercontent.com/40855496/182068866-dd8889ec-e8e4-43ca-9d8f-5cac8f9fbf59.png)
 
 
 The updated design is checked in as mux_fix.v
