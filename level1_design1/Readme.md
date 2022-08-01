@@ -57,9 +57,13 @@ The updated design is checked in as mux_fix.v in level1_design1_fix directory.
 
 ## Verification Strategy
 Verification Strategy implied for mux design is as follows
+
 -generating random inputs for all input ports
+
 -generating random value on select line which will enable the testbench to drive any and all select lines
+
 -capturing output value for the respective select line input.
+
 -comparing output to the actual value present on input port as per the select line driven.
 
 
