@@ -34,22 +34,20 @@ def run_test(dut):
 
     ######### CTB : Modify the test to expose the bug #############
     # input transaction
-    #mav_putvalue_src1 = 0x9C
-    #mav_putvalue_src2 = 0x6F
-    #mav_putvalue_src3 = 0x50
+    
     mav_putvalue_src1 = random.randint(0,255)   ####random src1###
     mav_putvalue_src2 = random.randint(0,255)   ####random src2####
     mav_putvalue_src3 = random.randint(0,255)   ####random src3####
-    mav_putvalue_instr = 0x101010B3
+    
     print("src1,src2,src3 : ",mav_putvalue_src1, mav_putvalue_src2, mav_putvalue_src3)
     count = 0   ####to count no of errors####
 
-    #################Instruction Dictionary###############
+    ##########Instruction opcode Dictionary###############
     ####for each operation as key in the dictionary, #####
     ####values are written with all unused bit as 0  #####
     #### and then as 1.###################################
     ###################################################### 
-    Instruction_dict= { 'ANDN' : [ 0x40007033 , 0x41FFFFB3 ], #Error Found : gives and result not ~and result
+    opcode_dictionary= { 'ANDN' : [ 0x40007033 , 0x41FFFFB3 ], #Error Found : gives and result not ~and result
 	'ORN' : [ 0x40006033 , 0x41FFEFB3 ],
 	'XNOR' : [ 0x40004033 , 0x41FFCFB3],
 	'SLO' : [ 0x20001033 , 0x21FF9FB3 ],
@@ -80,7 +78,7 @@ def run_test(dut):
 	'CRC32C.B' : [ 0x61801013 , 0x618F9F93 ],
 	'CRC32C.H' : [ 0x61901013 , 0x619F9F93 ],
 	'CRC32C.W' : [ 0x61A01013 , 0x61AF9F93 ],
-'CLMUL' : [ 0x0A001033 , 0x0BFF9FB3 ],
+	'CLMUL' : [ 0x0A001033 , 0x0BFF9FB3 ],
 	'CLMULH' : [ 0x0A003033 , 0x0BFFBFB3 ],
 	'CLMULR' : [ 0x0A002033 , 0x0BFFAFB3 ],
 	'MIN' : [ 0x0A004033 , 0x0BFFCFB3 ],
@@ -109,7 +107,7 @@ def run_test(dut):
 	'BFP' : [ 0x48007033 , 0x49FFFFB3 ]
 	}
 
-    for key,values in Instruction_dict.items():
+    for key,values in opcode_dictionary.items():
         print("Key : ",key)
         if(isinstance(values, list)):
             for value in values:
@@ -142,13 +140,11 @@ def run_test(dut):
                 if(dut_output != expected_mav_putvalue):
                     count +=1
                     print("no. of errors", count)
+				
+				
 
-            
+    print ("Total error count = ",count)       
     # comparison assert
-    error_message = f'Value mismatch DUT = {hex(dut_output)} does not match MODEL = {hex(expected_mav_putvalue)}'
+    error_message = f'Value mismatch found for {count} times'
     
-    assert count == 1, error_message
-    #assert dut_output == expected_mav_putvalue, error_message
-
-            
-
+    assert count == 0, error_message
