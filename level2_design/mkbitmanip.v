@@ -2658,8 +2658,8 @@ module mkbitmanip(CLK,
   assign field1__h109 =
 	     (mav_putvalue_instr[31:25] == 7'b0100000 &&
 	      x__h254 == 10'b1110110011) ?
-	       x__h39889_2 :
-	       IF_mav_putvalue_instr_BITS_31_TO_25_EQ_0b10000_ETC___d2273 ;  //x__h39889_2 is used on line 3911 to compute ANDN 
+	       x__h39889 :
+	       IF_mav_putvalue_instr_BITS_31_TO_25_EQ_0b10000_ETC___d2273 ;  
   assign field1__h1126 = { 16'd0, rs__h8634 } ;
   assign field1__h1205 =
 	     (x__h8685 ^ mav_putvalue_instr[12]) ?
@@ -3909,7 +3909,6 @@ module mkbitmanip(CLK,
   assign x__h39722 = ~x__h39744 ;
   assign x__h39744 = 32'hFFFFFFFF << shamt__h39728 ;
   assign x__h39889 = mav_putvalue_src1 & mav_putvalue_src2 ;
-  assign x__h39889_2 = mav_putvalue_src1 & (~mav_putvalue_src2) ;//adding not of src2 in x__h39889_2:line 2661 uses this for returning ANDN output	
   assign x__h410 = { mav_putvalue_instr[14:12], mav_putvalue_instr[6:4] } ;
   assign x__h4309 = mav_putvalue_src1[x__h4425] ;
   assign x__h4402 = 32'd1 << x__h4425 ;
