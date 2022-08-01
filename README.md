@@ -13,7 +13,7 @@ to this verification environment.
 
 # About me
 
-I am a Btech graduate with major in Electronics and Communication. I have been working as Product Validation Engineer
+I am a Btech graduate with major in Electronics and Communication from YMCA University of Science and Technology, Faridabad. I have been working as Product Validation Engineer
 for a High Level Synthesis Tool for two years now. I am very much curious about learning protocols and verification of designs.
 
 # Level1_design1
