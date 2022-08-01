@@ -85,7 +85,7 @@ Updating the design and re-running the test makes the test pass.
 Detecting Overlapping sequences now: 
 ![image](https://user-images.githubusercontent.com/40855496/182069519-f88c9219-4882-4d5c-9565-dabfd22d583c.png)
 
-The updated design is checked in as seq_detect_1011_fix.v
+The updated design is checked in as seq_detect_1011_fix.v in level1_design2_fix directory.
 
 ## Verification Strategy
 
